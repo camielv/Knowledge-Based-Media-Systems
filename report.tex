@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,pdftex]{geometry}
+\setlength{\oddsidemargin}{5mm}
+\setlength{\evensidemargin}{5mm}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{url}
+\usepackage{lastpage}
+\urlstyle{same}
+
+% Page numbering
+\lhead{SmartClass: Optimizing Education}
+\rhead{page \thepage/\pageref{LastPage}}
+\cfoot{}
+\rfoot{\thepage}
+
+% TITLE FORMAT
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\makeatletter
+\def\printtitle{
+    {\centering \@title\par}}
+\makeatother                  
+
+\makeatletter
+\def\printauthor{
+    {\centering \large \@author}}
+\makeatother
+
+% TITLE
+\title{
+\HRule{0.5pt} \\
+\LARGE \textbf{\textsc{SmartClass}}\\[0.5cm]
+\normalsize \textsc{Optimizing Education}
+\HRule{2pt}\\ [0.5cm]
+\normalsize
+\today
+}
+
+\author{
+\vspace{1.5cm}
+Supervised by dr. F. Nack and M. S. Latour\\[0.5cm]
+\begin{tabular}{c c c c}
+M. A. Cabot & S. Laan & C. R. Verschoor & A. J. Wiggers\\
+6047262 & 6036031 & 10017321 & 6036163
+\end{tabular}\\[0.5cm]
+Artificial Intelligence\\
+Faculty of Science\\
+Universiteit van Amsterdam\\
+}
+
+% BEGIN DOCUMENT
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\printtitle                  
+\vfill
+\begin{abstract}
+\noindent This paper describes a design of a knowledge media application for universities based on the user experience of lectures in university. The application, called SmartClass, gathers data from the user, internet and previous presentations in order to create new presentation slides based on the feedback of users. The application focuses on the individual experience of the users: the teacher and the student. All processed data is represented in OWL/RDF format, to provide a reasoning logic that can run queries in our ontology and browse through the available data. The user can ask questions about specific elements of the presentation. The application searches the information about this query and presents this to the user on newly generated slides. The application contains a self learning system that improves the presentation based on feedback, namely the approval or denial of slides and the amount of questions asked.
+\end{abstract}
+\printauthor
+\newpage
+
+% TABLEOFCONTENTS
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+
+% CONTENT
+\section{Introduction}
+This paper shows the framework of a knowledge based multimedia system designed to generate new slides for a presentation in two scenario’s. The first scenario is when the system generates new slides for the lecturer offline, improving on the slides that were used the year before. The second scenario is when the system generates a personal slide, online, for a student who has a question about the given lecture. In this case offline means that generation of presentation slides happens before the presentation and online means that the application generates real time the presentation slides
+
+In the next sections the following aspects regarding the application are described: the user groups, the design and concepts, the application from student perspective, the application from teacher perspective, the interface of the applications and lastly the application is discussed. 
+
+\section{User groups}
+The system is designed with a specific group of users in mind. There are two main user groups, which will be described in this section.
+
+\subsection{Teacher}
+The first group of users is the group of teachers. This group has the most control over the system. It is important that the system gives teachers this control without distracting them from their main task, in example giving a lecture.
+
+\subsection{Students}
+The other user group is the group of students. Students will only use the system during lectures. We distinguish between three stereotypical `students’:
+\begin{itemize}
+\item The Normal Student pays attention during lectures. When he has a question it will be an in-depth question. He wants to know more than is necessary.
+\item The Lazy Student is lazy. The student does not take notes, does not pay attention, or at least not the whole time. In general, the student will not ask any questions. The only exception is when a subject is discussed that appeals to him/her personally. He/she might also ask sarcastic questions.
+\item The Not That Smart Student is a bit slower of understanding. He/she is always a few steps behind. Whenever he/she asks a question, it might have already been answered, the student just did not notice the answer. Other questions from this student include questions about concepts that are considered known, but he/she forgot.
+\end{itemize}
+\section{Application Design and Concepts}
+The application will allow users to access new generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. In this section, the concepts that were used to design the application are described.
+% Note above sentence has to be better
+
+\subsection{Information Gathering}
+The application gathers information from the following sources:
+\begin{description}
+\item[Student user of the application.] The amount of questions users ask concerning a presentation slide indicate the value of the slide (feedback to the application).
+\item[Teacher user of the application.] Whether a teacher presents or deletes a newly generated presentation slide (feedback to the application).
+\item[Encyclopedia or content related websites.] To automatically generate a new presentation slide containing the answer to the question.
+\item[Previous generated slides.] To generate new presentation slides based on the performance of previous presentation slides.
+\end{description}
+
+\subsection{Displayed information}
+The application displays various information for both the user groups. This section describes the displayed information for both student and teacher. How the information changes based on the systems input is described in the next section. 
+\subsubsection{Student}
+The application displays the following information to the users that are students:
+\begin{description}
+\item[Presentation slides.] The generated slides of the teacher are displayed, so the student can follow the presentation given by the teacher. The student has the option to browse through the presentation slides or to automatically follow the teacher’s presentation slides.
+\item[Asked questions.] Questions asked by students will be displayed in the Quick Question Box, which is described in a later section. % Reference should be added 
+\item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students.
+\item[Notes.] The student can freely scroll through the notes that accompany each slide and add information to notes of previous or upcoming slides as well. The student has the ability to draw and/or write these notes.
+\end{description}
+
+\subsubsection{Teacher}
+The application displays the following information to the users that are teacher:
+\begin{description}
+\item[Presentation slides.] The generated slides are displayed, so the teacher sees the generated presentation in front. The teacher can comfortably view and present the presentation slides.
+\item[Asked questions.] The top and unanswered questions are displayed, so the teacher sees the questions of the student, while giving its presentation. Its teacher’s decision to treat the answer slide. 
+\item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students. The teacher has the ability to reject or use the generated presentation slide.
+\item[Notes.] The teacher has the ability to use speaker notes while giving the presentation in order to prepare the presentation.
+\end{description}
+
+\subsection{User Contribution}
+There are various ways to influence the output of the system. This section will describe the influence of every user of the application.
+\subsubsection{Student}
+Every user that is a student has three options:
+\begin{description}
+\item[Asking questions.] A visual change in output is that the question will appear in the question box. The system will also try to find additional information about the subject that might help answer the question.
+\item[Voting in favor or in disfavor of questions.] A voting system is used to determine the importance of unanswered questions. Users can vote for a question if they also want additional information about the subject. The questions with the most votes appear at the top of the question box to indicate that these have the highest priority.
+\item[Making notes.] As these notes are personal, they will not change the output for other users. When the user is taking notes of a certain presentation slide, the student can go back to the concerning presentation slide.
+\end{description}
+
+\subsubsection{Teacher}
+Users that are teachers have these options: 
+\begin{description}
+\item[Deleting generated slides.] A teacher has to approve of each slide before they are used in the presentation. This is to avoid confusion and to leave out irrelevant and unnecessary information.
+\item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
+\end{description}
+
+\subsection{Information Searching}
+A search for information is necessary if new slides are to be generated. When a question is asked, there are two important features for this question.
+The domain of the question. This is determined by the slide at which it was asked. 
+Textual input. Keywords in the question (e.g. `where’, `when’, `how’) and the use of concepts (e.g. cockpit in a presentation about airplanes) are the most important.
+Slide search
+Domain of the slide
+Meta-information
+
+
+
+Self learning system
+The system will use machine learning methods to improve itself. There are multiple features that can tell the system how well it is functioning:
+Student questions. Several questions for one slide indicate that this slide is not very clear or that the slide needs additional information. 
+Approval by teachers. Since the teacher can approve or reject newly formed slides, the system can learn which slides are favorable. Of course, this does lead to a biased idea of a good slide, since the teacher may have a wrong idea about slide creation. 
+Test results. When several students make mistakes concerning one particular subject, it needs extra coverage. The system should be able to provide additional slides about this particular subject.
+
+
+Slide Representation
+Each slide (or combination of slides) should contain the following components:
+The title. It addresses the main topic of the current slide.
+Bullet points. Each bullet point is related/linked to the title. 
+Text. Each piece of text is related/linked to a bullet point.
+Images. Each image is related/linked to a bullet point.
+
+
+Offline generation
+Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation one of two types of offline generation is performed. The first time a lecture is given using this system the previous slides do not have the required representation. In this case the system must place the content of the old slides in the representation used by the system. If the previous slides already have the required representation, then the new presentation can be improved by adding slides that answered popular questions. The teacher is able to reject, alter or add new slides.
+
+Online generation
+A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student’s question. We distinguish between two types of questions: definition- and open-questions. 
+A definition-question is a question about the definition of a term. The system create a slide that has as title the selected term and as content the definition of that term. If available, an image can be added to clarify the definition. This type op question will be especially helpful for the forgetful and less intelligent student. 
+An open-question is any question other than a definition-question. Of all the information available about the term in question, only the information that is relevant to the question needs to be displayed on the new slide. The relevant information is selected by decomposing the question into a subject, relation and object. One of these parts is the selected term (what the question is about) and another is the thing that needs to be answered. What essentially needs to happen is that the question is translated into a RDF query. A RDF query can then be used to find the relevant information on the internet. After retrieving the relevant information a slide can be generated according to the slide representation explained above.
+
+Quick Question Box
+The Quick Question Box (QQB) is displayed on both the students’ interface as well on the teacher’s interface. The QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system.
+
+Notes
+As stated before, beneath every slide a student is able to make his/her notes. After a lecture the student will be able to extract a file containing the slides with his notes. 
+\end{document}
+​
