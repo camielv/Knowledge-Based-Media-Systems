@@ -80,7 +80,7 @@ In the next sections the following aspects regarding the application are describ
 The system is designed with a specific group of users in mind. There are two main user groups, which will be described in this section.
 
 \subsection{Teacher}
-The first group of users is the group of teachers. This group has the most control over the system. It is important that the system gives teachers this control without distracting them from their main task, in example giving a lecture.
+The first group of users is the group of teachers. This group has the most control over the system. It is important that the system gives teachers this control without distracting them from their main task, i.e. giving a lecture.
 
 \subsection{Students}
 The other user group is the group of students. Students will only use the system during lectures. We distinguish between three stereotypical `students’:
@@ -89,14 +89,16 @@ The other user group is the group of students. Students will only use the system
 \item The Lazy Student is lazy. The student does not take notes, does not pay attention, or at least not the whole time. In general, the student will not ask any questions. The only exception is when a subject is discussed that appeals to him/her personally. He/she might also ask sarcastic questions.
 \item The Not That Smart Student is a bit slower of understanding. He/she is always a few steps behind. Whenever he/she asks a question, it might have already been answered, the student just did not notice the answer. Other questions from this student include questions about concepts that are considered known, but he/she forgot.
 \end{itemize}
+
 \section{Application Design and Concepts}
-The application will allow users to access new generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. In this section, the concepts that were used to design the application are described.
-% Note above sentence has to be better
+The application will allow users to access the newly generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. This section describes the concepts that are used to design the SmartClass application.
+% Note above sentence has to be better. 
+% Is this better?
 
 \subsection{Information Gathering}
 The application gathers information from the following sources:
 \begin{description}
-\item[Student user of the application.] The amount of questions users ask concerning a presentation slide indicate the value of the slide (feedback to the application).
+\item[Student user of the application.] The amount of questions users ask concerning a presentation slide indicates the value of the slide (feedback to the application).
 \item[Teacher user of the application.] Whether a teacher presents or deletes a newly generated presentation slide (feedback to the application).
 \item[Encyclopedia or content related websites.] To automatically generate a new presentation slide containing the answer to the question.
 \item[Previous generated slides.] To generate new presentation slides based on the performance of previous presentation slides.
@@ -107,7 +109,7 @@ The application displays various information for both the user groups. This sect
 \subsubsection{Student}
 The application displays the following information to the users that are students:
 \begin{description}
-\item[Presentation slides.] The generated slides of the teacher are displayed, so the student can follow the presentation given by the teacher. The student has the option to browse through the presentation slides or to automatically follow the teacher’s presentation slides.
+\item[Presentation slides.] The generated slides of the teacher are displayed, so the student can follow the presentation given by the teacher. The student has the option to browse through the presentation slides or to automatically follow the teacher's presentation slides.
 \item[Asked questions.] Questions asked by students will be displayed in the Quick Question Box, which is described in a later section. % Reference should be added 
 \item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students.
 \item[Notes.] The student can freely scroll through the notes that accompany each slide and add information to notes of previous or upcoming slides as well. The student has the ability to draw and/or write these notes.
@@ -175,14 +177,14 @@ Each slide (or combination of slides) should contain the following components:
 Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation one of two types of offline generation is performed. The first time a lecture is given using this system the previous slides do not have the required representation. In this case the system must place the content of the old slides in the representation used by the system. If the previous slides already have the required representation, then the new presentation can be improved by adding slides that answered popular questions. The teacher is able to reject, alter or add new slides.
 
 \subsection{Online generation}
-A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student’s question. We distinguish between two types of questions: definition- and open-questions.
+A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student's question. We distinguish between two types of questions: definition- and open-questions.
 
 A definition-question is a question about the definition of a term. The system create a slide that has as title the selected term and as content the definition of that term. If available, an image can be added to clarify the definition. This type op question will be especially helpful for the forgetful and less intelligent student. 
 
 An open-question is any question other than a definition-question. Of all the information available about the term in question, only the information that is relevant to the question needs to be displayed on the new slide. The relevant information is selected by decomposing the question into a subject, relation and object. One of these parts is the selected term (what the question is about) and another is the thing that needs to be answered. What essentially needs to happen is that the question is translated into a RDF query. A RDF query can then be used to find the relevant information on the internet. After retrieving the relevant information a slide can be generated according to the slide representation explained above.
 
 \subsection{Quick Question Box}
-The Quick Question Box (QQB) is displayed on both the students’ interface as well on the teacher’s interface. The QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system.
+The Quick Question Box (QQB) is displayed on both the students’ interface as well on the teacher's interface. The QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system.
 
 \subsection{Notes}
 As stated before, beneath every slide a student is able to make his/her notes. After a lecture the student will be able to extract a file containing the slides with his notes. 
@@ -240,7 +242,7 @@ The question dialog is a popup window in which the student can type a question o
 \end{description}
 \subsection{Student and Teacher}
 \subsubsection{Login System}
-The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the users personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining user’s security credentials. Since every user of the application has an account at the university, this service fits in our application. In the figure below a picture of the CAS login screen.
+The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the users personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining their security credentials. Since every user of the application has an account at the university, this service fits in our application. In the figure below a picture of the CAS login screen.
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{Cas.png}
