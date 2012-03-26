@@ -72,10 +72,8 @@ Universiteit van Amsterdam\\
 
 % CONTENT
 \section{Introduction}
-This paper shows the framework of a knowledge based multimedia system designed to generate new slides for a presentation in two scenarios. The first scenario is when the system generates new slides for the lecturer offline, improving on the slides that were used the year before. The second scenario is when the system generates a personal slide, online, for a student who has a question about the given lecture. In this case offline means that generation of presentation slides happens before the presentation and online means that the application generates real time the presentation slides. This application was designed with the perspective of the users, the teacher and the students, in mind.
-
-SmartClass was designed with the following in mind: `What would the student expect from a system that enhances lectures?'. The system should be able to make a lecture a more complete and more interesting learning experience than a regular lecture. Not only should it encourage students to actively participate and ask questions, it should also enable them to give feedback on the slides and presentation indirectly. 
-
+This paper shows the framework of a knowledge based multimedia system designed to generate new slides for a presentation in two scenarios. The first scenario is when the system generates new slides for the user that gives the lecture, offline, improving the presentation that was used the year before. The second scenario is when the system generates a personal slide, online, for a student who has a question about the given lecture. In this case offline means that generation of presentation slides happens before the presentation and online means that the application generates real time the presentation slides. This application was designed with the perspective of the users, the teacher and the students, in mind.\\\\
+SmartClass was designed with the following in mind: `What would the student expect from a system that enhances lectures?'. The system should be able to make a lecture a more complete and more interesting learning experience than a regular lecture. Not only should it encourage students to actively participate and ask questions, it should also enable them to give feedback on the slides and presentation indirectly. \\\\
 During a lecture, students may have a question about the content of the presentation. Several problems can arise when it comes to asking questions during a lecture:
 \begin{itemize}
 \item Students may fear interrupting the teacher.
@@ -83,50 +81,58 @@ During a lecture, students may have a question about the content of the presenta
 \item Students may think that their question involves something that has already been answered earlier in the lecture. 
 \item A teacher may be interrupted by questions that involve earlier parts in the slides (if the student was not paying attention).
 \end{itemize}
-SmartClass makes the experience of asking questions anonymous and simple resulting in a better lecture experience.
 
-Many teachers use the slides of previous years as a guideline for the next year, or sometimes even copy them entirely. In the first case, it will cost a significant amount of time to adjust the slides manually. In the second case, the slides may be outdated, new techniques or discoveries might have been made that require the slides to be adjusted. In both cases, SmartClass comes in handy.  Generation of new slides happens based on slides of previous years but the system looks at new sources simultaneously. These slides can still be fully edited giving the teacher full control over the content of his/her presentation. 
-
+SmartClass will make the experience of asking questions anonymous and simple, resulting in a better lecture experience.\\\\
+Many teachers use the slides of previous years as a guideline for the next year, or sometimes even copy them entirely. In the first case, it will cost a significant amount of time to adjust the slides manually. In the second case, the slides may be outdated, new techniques or discoveries might have been made that require the slides to be adjusted. In both cases, SmartClass comes in handy.  Generation of new slides happens based on slides of previous years but the system looks at new sources simultaneously. These slides can still be fully edited giving the teacher full control over the content of his/her presentation. \\\\
 In the next sections the following aspects regarding the application are described: the user groups, the design and concepts, the application from student perspective, the application from teacher perspective, the interface of the applications and lastly the application is discussed. 
 
 \section{User groups}
-The system is designed with a specific group of users in mind. There are two main user groups, which will be described in this section.
-
+The system is designed for two specific groups of users, both of which will be described in this section.
 \subsection{Students}
 The first user group is the group of students. Students will only use the system during lectures. 
 Since no two students are the same, the following three `stereotypical' students were created to take into account as much students as possible :
 \begin{itemize}
-\item The Normal Student pays attention during lectures. When he has a question it will be an in-depth question. He wants to know more than is necessary.
-\item The Lazy Student is lazy. The student does not take notes, does not pay attention, or at least not the whole time. In general, the student will not ask any questions. The only exception is when a subject is discussed that appeals to him/her personally. He/she might also ask sarcastic questions.
-\item The Not That Smart Student is a bit slower of understanding. He/she is always a few steps behind. Whenever he/she asks a question, it might have already been answered, the student just did not notice the answer. Other questions from this student include questions about concepts that are considered known, but he/she forgot.
+\item The Normal Students pay attention during lectures. When they have a question it will be an in-depth question. They want to know more than is necessary.
+\item The Lazy Students are lazy. These students do not take notes, do not pay attention, or at least not the whole time. In general, they will not ask any questions. The only exception is when a subject is discussed that appeals to them personally. They might also ask sarcastic or irrelevant questions.
+\item The Not That Smart Students are a bit slower of understanding. They always are a few steps behind. Whenever they ask a question, it might have already been answered, they just did not notice the answer. Other questions from these students include questions about concepts that are considered known, but they forgot.
 \end{itemize}
-These three types of students were taken into consideration during the design process.
 
-\subsection{Teacher}
-The second group of users consists of teachers. This group should have a lot more control over the system than a student. It is important that the system gives teachers this control without distracting them from their main task, namely, giving the lecture. No distinction was made between different types of teacher, but the system should be able to `learn' the preferences of the teacher through examples and feedback. 
+These three types of students were taken into consideration in the design process.
+
+\subsection{Teachers}
+The second group of users consists of teachers. This group should have a lot more control over the system than a student. It is important that the system gives teachers this control without distracting them from their main task, namely, giving the lecture. No distinction was made between different types of teacher, but the system should be able to `learn' the preferences of the teacher through examples and feedback.  
 
 \section{System overview}
-The application will allow users to access the newly generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. This section describes the concepts that are used to design the SmartClass application.
-%TODO references need to be added.
-The system that was designed consists of several components (see TODOref{plaatje}). The system follows the following procedure:
-\begin{enumerate}
-\item The teacher upload previous slides via the teacher interface (see section \ref{teacherInterface}).
-\item The system then will generate new slides in the pre-generation step (see section \ref{offlineGeneration}).
-\item The teacher will edit the slides via the teacher interface. The edited content will be used as feedback for the system TODOref
-\item The presentation starts.
-\item The students ask questions via the question dialog in the student interface (see section \ref{studentInterface}).
-\item The students vote questions up and down in the quick question box (see section \ref{qqb}) in the student interface.
-\item The system generates new slides in the slide generation step.
-\item The users can preview the slide.
-\end{enumerate}
-%TODO references need to be added.
-The teacher and student communicate indirectly through the quick question box and slide generation, which will be covered in the following sections TODOref TODOref and TODOref. Slide generation, that occurs during pre-generation and when a question is asked, makes use of both the system knowledge base and the external knowledge base. These are covered in subsections TODOref. 
+The application will allow users to access new generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. This section describes the concepts that are used to design the SmartClass application.
 
-%TODO insert image of system
+The system that was designed consists of several components. In this section each component will be described in detail, but first an overview of the whole system is given: the global interaction and system flow are described. First the global system flow is explained.
+
+Figure \ref{flowchart} shows the global system flow. Firstly, the teacher has to input some information. This information is used in the presentation generation. The slides the system produces have to be evaluated by the teacher. If the teacher does not approve, he has to give feedback and the system tries again.
+When the slides are approved, the presentation can commence. In practice the slides there will be much more time between the approval of the slides and the start of the presentation; the flow chart gives the impression this happens immediately after the approval, but this does not have to be the case.
+When the presentation starts, the students have the opportunity to interact with the system. They can ask questions to the system. In the event this happens, the system tries to answer the question and generates slides to answer it.
+
+In figure \ref{systemOverview} the different components of the system are displayed. The arrows indicate communication links between components. The global interaction between these different system parts will be explained shortly. 
+
+The main concept the system uses is the slide generation component. The same slide generator is used for the online and offline generation. The input for the slide generation comes from different sources. The main source is the external knowledge base. The other inputs are the inputs from the student (via the Quick Question Dialog), the teacher (via pre-generation). Finally the knowledge that is necessary for actually creating the slides comes from the system knowledge base.
+When the slides are generated they are stored in the system knowledge base. The question with the answer slide will appear in the Quick Question Box, for both teacher and student.
+The Quick Question Dialog uses the external knowledge base for definition questions, this will be explained in more detail later. The system knowledge base provides the tools to convert the posed question into a RDF query.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{KBMSFlowchartnew.pdf}
+\caption{Flowchart of the system.}
+\label{flowchart}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{systemOverview.pdf}
+\caption{The system overview.}
+\label{systemOverview}
+\end{figure}
 
 \subsection{User Interface}
 %TODO insert images
-TODO insert images
 
 \subsection{Slide and lecture representation}
 Each slide (or combination of slides) should contain the following components:
@@ -136,8 +142,7 @@ Each slide (or combination of slides) should contain the following components:
 \item[Text.] Each piece of text is related/linked to a bullet point.
 \item[Images.] Each image is related/linked to a bullet point.
 \end{description}
-
-A lecture is also represented as a combination of components, only in this case, the components are slides. Each slide serves a special purpose (i.e. introduction, content and conclusion). By ordering the generated slides in such a way that it these purposes form a coherent story, 
+A lecture is also represented as a combination of components, only in this case, the components are slides. Each slide serves a special purpose (e.g. introduction, content or conclusion).  By ordering the generated slides in such a way that it these purposes form a coherent story, the content is ordered as well so that the presentation as a whole makes sense. 
 
 \subsection{Slide generation in general}
 Each slide is generated according to a template. The components are all filled in in the correct place. The system can choose between multiple templates, based on the number (and type) of components that are to be used. 
@@ -147,7 +152,6 @@ There is a limit to the number of words on a single slide to prevent slides from
 The system also prefers balanced slides over slides filled with a single component, e.g. two slides, each containing two images and two pieces of text, will be preferred over a slide containing only text and a slide containing only images. How this balance is reached depends on the semantic knowledge about each component. The system will try to distribute components in such a way that corresponding ones are put on the same slides, using the semantic knowledge it has of these components. 
 
 \subsection{Offline generation}
-\label{offlineGeneration}
 Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation one of two types of offline generation is performed. The first time a lecture is given using this system the previous slides do not have the required representation. In this case the system must place the content of the old slides in the representation used by the system. If the previous slides already have the required representation, then the new presentation can be improved by adding slides that answered popular questions. The teacher is able to reject, alter or add new slides.
 
 \subsection{Online generation}
@@ -187,75 +191,56 @@ The system will use machine learning methods to improve itself. There are multip
 \end{description}
 
 \subsection{Login system}
-The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the user's personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining user's security credentials. Since every user of the application has an account at the university, this service fits in our application. Figure TODOref shows the CAS login screen.
-%TODO insert CAS image
-
-%TODO (re)move section 'Displayed information'?
-\subsection{TODO remove? Displayed information}
-The application displays various information for both the user groups. This section describes the displayed information for both student and teacher. How the information changes based on the systems input is described in the next section. 
-\subsubsection{Student}
-The application displays the following information to the users that are students:
-\begin{description}
-\item[Presentation slides.] The generated slides of the teacher are displayed, so the student can follow the presentation given by the teacher. The student has the option to browse through the presentation slides or to automatically follow the teacher's presentation slides.
-\item[Asked questions.] Questions asked by students will be displayed in the Quick Question Box, which is described in a later section. % Reference should be added 
-\item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students.
-\item[Notes.] The student can freely scroll through the notes that accompany each slide and add information to notes of previous or upcoming slides as well. The student has the ability to draw and/or write these notes.
-\end{description}
-\subsubsection{Teacher}
-The application displays the following information to the users that are teacher:
-\begin{description}
-\item[Presentation slides.] The generated slides are displayed, so the teacher sees the generated presentation in front. The teacher can comfortably view and present the presentation slides.
-\item[Asked questions.] The top and unanswered questions are displayed, so the teacher sees the questions of the student, while giving its presentation. It's up to the teacher to decide if en when to discuss a question using a generated slide. 
-\item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students. The teacher has the ability to reject or use the generated presentation slide.
-\item[Notes.] The teacher has the ability to use speaker notes while giving the presentation in order to prepare the presentation.
-\end{description}
-
-%TODO (re)move section 'User Contribution'?
-\subsection{TODO remove/move? User Contribution}
-There are various ways to influence the output of the system. This section will describe the influence of every user of the application.
-\subsubsection{Student}
-Every user that is a student has three options:
-\begin{description}
-\item[Asking questions.] A visual change in output is that the question will appear in the question box. The system will also try to find additional information about the subject that might help answer the question.
-\item[Voting in favor or in disfavor of questions.] A voting system is used to determine the importance of unanswered questions. Users can vote for a question if they also want additional information about the subject. The questions with the most votes appear at the top of the question box to indicate that these have the highest priority.
-\item[Making notes.] As these notes are personal, they will not change the output for other users. When the user is taking notes of a certain presentation slide, the student can go back to the concerning presentation slide.
-\end{description}
-\subsubsection{Teacher}
-Users that are teachers have these options: 
-\begin{description}
-\item[Deleting generated slides.] A teacher has to approve of each slide before they are used in the presentation. This is to avoid confusion and to leave out irrelevant and unnecessary information.
-\item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
-\end{description}
+\subsubsection{Login System}
+The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the users personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining their security credentials. Since every user of the application has an account at the university, this service fits in our application. Figure \ref{CAS} shows a picture of the CAS login screen.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{Cas.png}
+\caption{Central Authentication Service login screen}
+\label{CAS}
+\end{figure}
 
 \subsection{Quick Question Box}
-\label{qqb}
 The Quick Question Box (QQB) is displayed on both the students' interface as well on the teacher's interface. The QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system.
 
 
 \section{Student Perspective}
 \subsection{Student interface}
-%TODO insert image
-The main window is where the most time is spent. It consists of several components, see fig <FIGUUR met nummers>.%TODO add ref
-\begin{enumerate}
-\item Quick Question Box\\
-In the Quick Question Box the best questions are shown together with the number of votes. The questions can be clicked. On clicking the generated slide for that question is shown. Each question is accompanied by two buttons that allow a user to vote in favor or in disfavor of the question. 
-\item The Presentation Panel\\
-In the presentation panel slides are shown. The keywords on the slides can be clicked. On clicking the Question Dialog will popup. By default, the slide on the presentation panel automatically synchronizes with the slide being discussed by the teacher. An exception is when a student is making notes about a slide. In this case the panel will synchronize after the student is done making notes. It is also possible to toggle the synchronization off or on manually.  
-\item Navigation Thumbnails\\
-The navigation thumbnails are little previews of the slides to come and the slides that already have been showed. They can be used to navigate through the presentation.
-\item Notes Textbox\\
-In the Notes Textbox, the student can make notes. These notes will be linked to the slide that is currently shown (in the presentation panel, which is not essentially the same as the slide the teacher is showing). The textbox is scrollable. When moving from one note to another, the slides will move accordingly. 
-\end{enumerate}
 
-\subsection{Question dialog}
-The question dialog is a popup window in which the student can type a question or hit the definition-button.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{studentInterface.pdf}
+\caption{The student interface. Questions are not anonymous here.}
+\label{studentInterface}
+\end{figure}
 
-There are various ways to influence the output of the system. Every user that is a student has three options:
+\subsubsection{Main Window}
+The main window is where the most time is spent. It consists of the following components shown in figure \ref{studentInterface}.
+\begin{description}
+\item[1. Quick Question Box] In the Quick Question Box the best questions are shown together with the number of votes. The questions can be clicked. If SmartClass was able to generate a slide to answer this question, then this slide is shown. Each question is accompanied by two buttons that allow a user to vote in favor or in disfavor of the question. 
+\item[2. The Presentation Panel] In the presentation panel slides are shown. The keywords on the slides can be clicked. On clicking the Question Dialog will popup. By default, the slide on the presentation panel automatically synchronizes with the slide being discussed by the teacher. An exception is when a student is making notes about a slide. In this case the panel will synchronize after the student is done making notes. It is also possible to toggle the synchronization off or on manually.  
+\item[3. Navigation Thumbnails] The navigation thumbnails are little previews of the slides to come and the slides that already have been showed. They can be used to navigate through the presentation.
+\item[4. Notes Textbox] In the Notes Textbox, the student can make notes. These notes will be linked to the slide that is currently shown (in the presentation panel, which is not essentially the same as the slide the teacher is showing). The textbox is scrollable. When moving from one note to another, the slides will move accordingly. 
+\end{description}
+
+\subsubsection{Question dialog}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{studentInterfaceAnswer.pdf}
+\caption{The student interface. A question in the QQB has been selected. Questions are not anonymous here.}
+\label{studentInterfaceAnswer}
+\end{figure}
+
+The question dialog is a popup window in which the student can type a question or hit the definition-button (see figure \ref{studentInterfaceAnswer}). There are various ways to influence the output of the system. Every user that is a student has three options:
 \begin{description}
 \item[Asking questions.] A visual change in output is that the question will appear in the question box. The system will also try to find additional information about the subject that might help answer the question.
 \item[Voting in favor or in disfavor of questions.] A voting system is used to determine the importance of unanswered questions. Users can vote for a question if they also want additional information about the subject. The questions with the most votes appear at the top of the question box to indicate that these have the highest priority.
 \item[Making notes.] As these notes are personal, they will not change the output for other users. When the user is taking notes of a certain presentation slide, the student can go back to the concerning presentation slide.
 \end{description}
+
+\subsubsection{Notes}
+As stated before, beneath every slide a student is able to make his/her notes. After a lecture the student will be able to extract a file containing the slides with his/her notes. 
 
 
 \section{Teacher Perspective}
@@ -263,65 +248,55 @@ Many teachers use the slides of previous years as a guideline for the next year,
 
 The presentation panel and speaker notes of the teacher interface are designed to be intuitive and similar to the way `normal' presentations are given. In addition, the teacher now has the QQB allowing him/her to be aware of pressing questions by students. Again, the teacher is in control of the content being shown. SmartClass leaves it up to the teacher to decide whether a newly generated slide is to be displayed. 
 
-\subsection{Displayed information}
-The application displays the following information to the users that are teacher:
-\begin{description}
-\item[Presentation slides.] The generated slides are displayed, so the teacher sees the generated presentation in front. The teacher can comfortably view and present the presentation slides.
-\item[Asked questions.] The top and unanswered questions are displayed, so the teacher sees the questions of the student, while giving its presentation. It's up to the teacher to decide if en when to discuss a question using a generated slide. 
-\item[Automatically generated presentation slides.] The system generates answer slides according to the question asked by the students. The teacher has the ability to reject or use the generated presentation slide.
-\item[Notes.] The teacher has the ability to use speaker notes while giving the presentation in order to prepare the presentation.
-\end{description}
-
 \subsection{Teacher Interface}
-In this section the interface is discussed of the interface.
+\subsubsection{Main Window}
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{KBMSInterface.png}
-\caption{A schematic of the interface, questions are not anonymous here}
+\includegraphics[width=0.7\textwidth]{teacherInterface.pdf}
+\caption{The teacher interface. Questions are not anonymous here.}
+\label{teacherInterface}
 \end{figure}
 
-\subsection{Student}
-\label{studentInterface}
-\subsubsection{Main Window}
-The main window is where the most time is spent. It consists of the following components shown in the above figure.
-\begin{description}
-\item[1. Quick Question Box] In the Quick Question Box the best questions are shown together with the number of votes. The questions can be clicked. On clicking the generated slide for that question is shown. Each question is accompanied by two buttons that allow a user to vote in favor or in disfavor of the question. 
-
-\item[2. The Presentation Panel] In the presentation panel slides are shown. The keywords on the slides can be clicked. On clicking the Question Dialog will popup. By default, the slide on the presentation panel automatically synchronizes with the slide being discussed by the teacher. An exception is when a student is making notes about a slide. In this case the panel will synchronize after the student is done making notes. It is also possible to toggle the synchronization off or on manually.  
-
-\item[3. Navigation Thumbnails] The navigation thumbnails are little previews of the slides to come and the slides that already have been showed. They can be used to navigate through the presentation.
-
-\item[4. Notes Textbox] In the Notes Textbox, the student can make notes. These notes will be linked to the slide that is currently shown (in the presentation panel, which is not essentially the same as the slide the teacher is showing). The textbox is scrollable. When moving from one note to another, the slides will move accordingly. 
-\end{description}
-
-\subsubsection{Question Dialog}
-The question dialog is a popup window in which the student can type a question or hit the definition-button.
-
-\subsection{Teacher}
-\label{teacherInterface}
-\subsubsection{Main Window}
+Figure \ref{teacherInterface} shows the teacher's interface during a lecture.
 \begin{description}
 \item[1. Quick Question Box] By default, the question box looks the same as that of the students. The difference is that when a teacher clicks a question, it will lead him to a preview of the slide which he/she can then choose to incorporate in his/her presentation by clicking the `accept' button. 
-
 \item[2. The Presentation Panel] Just as in the students interface, the presentation panel shows the current slides. Since the teacher is the one in charge of scrolling through the slides, there is no option for synchronization. 
-
 \item[3. Preview box] In this box, the teacher will be able to see a pre-generated slide after clicking a question. The teacher is able to include one of these slides in his/her presentation. 
-
 \item[4. Notes Textbox] In the Notes Textbox, the teacher can see personal notes that he/she made beforehand. It is usually easier to give a presentation if some keywords are written down beforehand, synchronizing them with the slides only makes it easier. The teacher does not have the ability to make new notes during the presentation, only beforehand.
 \end{description}
-\subsection{Student and Teacher}
-\subsubsection{Login System}
-The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the users personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining their security credentials. Since every user of the application has an account at the university, this service fits in our application. In the figure below a picture of the CAS login screen.
+\subsubsection{Editor window}
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{Cas.png}
-\caption{Central Authentication Service login screen}
+\includegraphics[width=0.7\textwidth]{teacherInterfaceEditor.pdf}
+\caption{The teacher editor. Questions are not anonymous here.}
+\label{teacherInterfaceEditor}
 \end{figure}
 
-%TODO
-\section{Discussion}
-Under construction
+Figure \ref{teacherInterfaceEditor} shows the interface of a teacher when generating a lecture offline.
+A teacher has the following options: 
+\begin{description}
+\item[Deleting generated slides.] A teacher has to approve of each slide before they are used in the presentation. This is to avoid confusion and to leave out irrelevant and unnecessary information.
+\item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
+\end{description}
 
+
+\section{Discussion}
+\subsection{Improvements}
+The system can be improved in a number of ways. Some of the shortcomings of the current design will be discussed. 
+\begin{itemize}
+\item Currently, if a student asks a question using the system, a slide is generated (if the system can give an answer) and then shown to the student. The problem here is that there is no guarantee that this answers the question, nor that it is the correct answer. The system may have somehow found false information or parsed the question wrong if it is an open question, thus creating the wrong query. Since the system will give the answer slide to the student during the presentation, there is no way for the teacher to check each and every slide that is generated. This manual check can be made afterwards but it would cost a lot of extra time and more importantly: it would be too late, the student already has the false knowledge. 
+
+A solution for this problem would be involving the other students in the slide creation. One approach to this is that when a question is asked, a slide will still be generated, but this slide can also be given votes by the students. Another approach is that students are able to answer questions themselves, but this may lead to chatting behavior. One of the better systems that uses this approach (and has been using it successfully) is StackOverflow, an online point for questions related to programming. A user can ask a question and this question will receive votes if other users think it is a good question. Then, anyone that is logged in can answer this question, and these answers can also receive votes if they are good. A user that asks good questions or gives good answers receives `reputation' as reward. This reputation is linked to the corresponding account, showing how credible the user is. However, this site is moderated to reduce irrelevant questions and answers and it is possible to answer questions quite some time after they have been asked. The system will only be online during the lecture and there are no moderators available, making it hard for such a system to work correctly. 
+
+\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. 
+\end{itemize}
+
+\subsection{Future work}
+%TODO
+
+%TODO fisnish
 \section{Conclusion}
 SmartClass was designed with the following in mind: `What would the student expect from a system that enhances lectures?'. The system should be able to make a lecture a more complete and more interesting learning experience than a regular lecture. Not only does it encourage students to actively participate and ask questions, it also enables them to give feedback on the slides and presentation indirectly. 
 The questions can be asked anonymously. This makes the asking of questions even more easy accessible. A few problems arise when it comes to asking questions during a lecture:
@@ -333,5 +308,8 @@ The questions can be asked anonymously. This makes the asking of questions even 
 \end{itemize}
 All these problems are solved by SmartClass:\\
 Asking a question via the Quick Question Box does not immediately interrupt the teacher. If the question can be answered by the system alone using new or previous slides, then the problem is solved. If this is not the case and it is a good, relevant question then other students may vote in favor of it. It will then reach the top of the box where it is clearly visible for the teacher, who can then choose to either use the slide that attempted to answer the problem and explain it further or just explain the answer without using these slides. Since students are free to scroll through the slides themselves, they will be able to see if their question has not already been answered, thus leaving more time for relevant and new questions.
+
+
 \end{document}
 ​
+
