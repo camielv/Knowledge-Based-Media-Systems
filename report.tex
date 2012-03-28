@@ -84,6 +84,7 @@ During a lecture, students may have a question about the content of the presenta
 
 SmartClass will make the experience of asking questions anonymous and simple, resulting in a better lecture experience.\\\\
 Many teachers use the slides of previous years as a guideline for the next year, or sometimes even copy them entirely. In the first case, it will cost a significant amount of time to adjust the slides manually. In the second case, the slides may be outdated, new techniques or discoveries might have been made that require the slides to be adjusted. In both cases, SmartClass comes in handy.  Generation of new slides happens based on slides of previous years but the system looks at new sources simultaneously. These slides can still be fully edited giving the teacher full control over the content of his/her presentation. \\\\
+
 In the next sections the following aspects regarding the application are described: the user groups, the design and concepts, the application from student perspective, the application from teacher perspective, the interface of the applications and lastly the application is discussed. 
 
 \section{User groups}
@@ -101,6 +102,7 @@ These three types of students were taken into consideration in the design proces
 
 \subsection{Teachers}
 The second group of users consists of teachers. This group should have a lot more control over the system than a student. It is important that the system gives teachers this control without distracting them from their main task, namely, giving the lecture. No distinction was made between different types of teacher, but the system should be able to `learn' the preferences of the teacher through examples and feedback.  
+
 
 \section{System overview}
 The application will allow users to access new generated content in two ways: Firstly, by generating new presentations based on previous presentations. Secondly, by generating a new presentation slide based on the question asked by the user. This section describes the concepts that are used to design the SmartClass application.
@@ -127,14 +129,22 @@ The Quick Question Dialog uses the external knowledge base for definition questi
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{systemOverview.pdf}
-\caption{The system overview.}
+\caption{The separate parts of the system and how they are connected.}
 \label{systemOverview}
 \end{figure}
 
-\subsection{User Interface}
-%TODO insert images
+\subsection{Lecture representation}
+The lecture representation holds the framework of the presentation. It defines how the course material is arranged. Firstly, the system must decide the main structure of the lecture. For example; first the introduction, then content and finally the conclusion. Secondly, the system must decide the flow of the lecture. A possible flow could be to first start with explaining the important terms and then use an example to clarify them even more.
 
-\subsection{Slide and lecture representation}
+Once the main structure and flow is determined the system must order the information that can be used for the lecture. In a good lecture each slide only contains terms and topics that are:
+\begin{itemize}
+\item known to the students in advance. This could be because it was explained in a previous lectures or because it is assumed to be common knowledge.
+\item explained in the previous slides of this lecture.
+\item explained in the current slide of this lecture.
+\end{itemize}
+The system must thus understand that to understand term A some other terms B and C must be understood first. It would then make no sense to place the slide explaining term A before the slides explaining term B and C. In order to know that B and C explain A the system contains hierarchical knowledge about the relations between the terms and topics of the lecture.
+
+\subsection{Slide representation}
 Each slide (or combination of slides) should contain the following components:
 \begin{description}
 \item[The title.] It addresses the main topic of the current slide.
@@ -142,7 +152,7 @@ Each slide (or combination of slides) should contain the following components:
 \item[Text.] Each piece of text is related/linked to a bullet point.
 \item[Images.] Each image is related/linked to a bullet point.
 \end{description}
-A lecture is also represented as a combination of components, only in this case, the components are slides. Each slide serves a special purpose (e.g. introduction, content or conclusion).  By ordering the generated slides in such a way that it these purposes form a coherent story, the content is ordered as well so that the presentation as a whole makes sense. 
+The system knows what the relationships are between the components on a slide. In case a question is asked about a term, the system must know what type of components would be best as answering the question. Some questions would be better answered with a picture (e.g. `What is an apple?’) while for other questions text would be more suitable (e.g. `When was king Louis XVI born?’). In order to do so, the system must have knowledge about where the term lies in the hierarchy of objects (e.g. does the question ask about the appearance of the term or about a date).
 
 \subsection{Slide generation in general}
 Each slide is generated according to a template. The components are all filled in in the correct place. The system can choose between multiple templates, based on the number (and type) of components that are to be used. 
@@ -191,7 +201,6 @@ The system will use machine learning methods to improve itself. There are multip
 \end{description}
 
 \subsection{Login system}
-\subsubsection{Login System}
 The application uses the Central Authentication Service (CAS) of the University of Amsterdam to allow users to access the application. This enables the system to save the users personal data (such as notes or question) without having to register on our application. CAS allows web applications to authenticate users without gaining their security credentials. Since every user of the application has an account at the university, this service fits in our application. Figure \ref{CAS} shows a picture of the CAS login screen.
 \begin{figure}[!h]
 \centering
