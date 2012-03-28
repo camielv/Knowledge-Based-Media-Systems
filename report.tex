@@ -152,7 +152,7 @@ Each slide (or combination of slides) should contain the following components:
 \item[Text.] Each piece of text is related/linked to a bullet point.
 \item[Images.] Each image is related/linked to a bullet point.
 \end{description}
-The system knows what the relationships are between the components on a slide. In case a question is asked about a term, the system must know what type of components would be best as answering the question. Some questions would be better answered with a picture (e.g. `What is an apple?’) while for other questions text would be more suitable (e.g. `When was king Louis XVI born?’). In order to do so, the system must have knowledge about where the term lies in the hierarchy of objects (e.g. does the question ask about the appearance of the term or about a date).
+The system knows what the relationships are between the components on a slide. In case a question is asked about a term, the system must know what type of components would be best as answering the question. Some questions would be better answered with a picture (e.g. `What is an apple?') while for other questions text would be more suitable (e.g. `When was king Louis XVI born?'). In order to do so, the system must have knowledge about where the term lies in the hierarchy of objects (e.g. does the question ask about the appearance of the term or about a date).
 
 \subsection{Slide generation in general}
 Each slide is generated according to a template. The components are all filled in in the correct place. The system can choose between multiple templates, based on the number (and type) of components that are to be used. 
@@ -162,14 +162,20 @@ There is a limit to the number of words on a single slide to prevent slides from
 The system also prefers balanced slides over slides filled with a single component, e.g. two slides, each containing two images and two pieces of text, will be preferred over a slide containing only text and a slide containing only images. How this balance is reached depends on the semantic knowledge about each component. The system will try to distribute components in such a way that corresponding ones are put on the same slides, using the semantic knowledge it has of these components. 
 
 \subsection{Offline generation}
-Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation one of two types of offline generation is performed. The first time a lecture is given using this system the previous slides do not have the required representation. In this case the system must place the content of the old slides in the representation used by the system. If the previous slides already have the required representation, then the new presentation can be improved by adding slides that answered popular questions. The teacher is able to reject, alter or add new slides.
+Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation different action need to be performed during the offline generation. 
+
+The first time a lecture is given using this system the previous slides do not have the required SmartClass-representation. In this case the system must place the content of the old slides in the representation used by the system. The system tries to match its lecture- and slide-templates with the slides of the previous slides. The templates that match best are then used for the offline generation. If the previous slides already have the required SmartClass-representation, then the previous templates are simply used for the offline generation.
+
+SmartClass uses a set of heuristics to determine whether to change the structure of the lecture. Changing the structure would be based on the feedback (if such exists) of last year's lecture. If last year the teacher chose to use a slide generated to answer a student's question, then this time the system can choose to add the slide to the presentation. Another set of heuristics are used to determine whether to update the content of the of a slide. The systems needs to search the external database to see if a piece of text, image or other slide components is outdated. If so, the system will replace these components (taking into consideration the lecture and slide representation).
+
+When SmartClass is finished with generating slides the teacher is able to reject, alter or add new slides. This way the teacher is always in full control of what the slides will depict. 
 
 \subsection{Online generation}
-A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student's question. We distinguish between two types of questions: definition- and open-questions. 
+A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student’s question. We distinguish between two types of questions: definition- and open-questions. 
 
-A definition-question is a question about the definition of a term. The system create a slide that has as title the selected term and as content the definition of that term. If available, an image can be added to clarify the definition. This type op question will be especially helpful for the forgetful and less intelligent student. 
+A definition-question is a question about the definition of a term. The system create a slide that has as title the selected term and as content the definition of that term. If available, an image can be added to clarify the definition. This type of question will be especially helpful for the forgetful and less intelligent student. 
 
-An open-question is any question other than a definition-question. Of all the information available about the term in question, only the information that is relevant to the question needs to be displayed on the new slide. The relevant information is selected by decomposing the question into a subject, relation and object. One of these parts is the selected term (what the question is about) and another is the thing that needs to be answered. What essentially needs to happen is that the question is translated into a RDF query. A RDF query can then be used to find the relevant information on the internet. After retrieving the relevant information a slide can be generated according to the slide representation explained above.
+An open-question is any question other than a definition-question. Of all the information available about the term in question, only the information that is relevant to the question needs to be displayed on the new slide. A keyword-extractor decomposes the question into its relevant components: the subject, relation and object. One of these parts is the selected term (what the question is about) and the other parts are related to the question that needs to be answered. What essentially happens is that the question is translated into a RDF query. A RDF query can then be used to find the relevant information on the external database. After retrieving the relevant information a slide can be generated according to the lecture and slide representation explained above.
 
 \subsection{Information Gathering}
 The application gathers information from the following sources:
@@ -219,7 +225,7 @@ The Quick Question Box (QQB) is displayed on both the students' interface as wel
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{studentInterface.pdf}
-\caption{The student interface. Questions are not anonymous here.}
+\caption{The student interface. Student names would normally not be shown in the student interface}
 \label{studentInterface}
 \end{figure}
 
@@ -236,12 +242,13 @@ The main window is where the most time is spent. It consists of the following co
 
 \begin{figure}[!h]
 \centering
+\includegraphics[width=0.7\textwidth]{studentInterfaceDialog.pdf}
 \includegraphics[width=0.7\textwidth]{studentInterfaceAnswer.pdf}
-\caption{The student interface. A question in the QQB has been selected. Questions are not anonymous here.}
-\label{studentInterfaceAnswer}
+\caption{The student interface. The first image shows a question being asked about a component on the current slide. The second image shows a question being selected in the QQB. Student names would normally not be shown in the student interface.}
+\label{studentInterfaceDialogAnswer}
 \end{figure}
 
-The question dialog is a popup window in which the student can type a question or hit the definition-button (see figure \ref{studentInterfaceAnswer}). There are various ways to influence the output of the system. Every user that is a student has three options:
+The question dialog is a popup window in which the student can type a question or hit the definition-button (see figure \ref{studentInterfaceDialogAnswer}). There are various ways to influence the output of the system. Every user that is a student has three options:
 \begin{description}
 \item[Asking questions.] A visual change in output is that the question will appear in the question box. The system will also try to find additional information about the subject that might help answer the question.
 \item[Voting in favor or in disfavor of questions.] A voting system is used to determine the importance of unanswered questions. Users can vote for a question if they also want additional information about the subject. The questions with the most votes appear at the top of the question box to indicate that these have the highest priority.
@@ -263,7 +270,7 @@ The presentation panel and speaker notes of the teacher interface are designed t
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{teacherInterface.pdf}
-\caption{The teacher interface. Questions are not anonymous here.}
+\caption{The teacher interface. The interface displays the most important and unanswered questions.}
 \label{teacherInterface}
 \end{figure}
 
@@ -279,12 +286,11 @@ Figure \ref{teacherInterface} shows the teacher's interface during a lecture.
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{teacherInterfaceEditor.pdf}
-\caption{The teacher editor. Questions are not anonymous here.}
+\caption{The teacher editor. As supposed to the student interface, the teacher interface does not display the questions anonymous.}
 \label{teacherInterfaceEditor}
 \end{figure}
 
-Figure \ref{teacherInterfaceEditor} shows the interface of a teacher when generating a lecture offline.
-A teacher has the following options: 
+Figure \ref{teacherInterfaceEditor} shows the interface of a teacher when generating a lecture offline. A teacher has the following options to influence the system: 
 \begin{description}
 \item[Deleting generated slides.] A teacher has to approve of each slide before they are used in the presentation. This is to avoid confusion and to leave out irrelevant and unnecessary information.
 \item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
@@ -307,16 +313,11 @@ A solution for this problem would be involving the other students in the slide c
 
 %TODO fisnish
 \section{Conclusion}
-SmartClass was designed with the following in mind: `What would the student expect from a system that enhances lectures?'. The system should be able to make a lecture a more complete and more interesting learning experience than a regular lecture. Not only does it encourage students to actively participate and ask questions, it also enables them to give feedback on the slides and presentation indirectly. 
-The questions can be asked anonymously. This makes the asking of questions even more easy accessible. A few problems arise when it comes to asking questions during a lecture:
-\begin{itemize}
-\item Students may fear interrupting the teacher.
-\item Students may think that their question is not a very good one.
-\item Students may think that their question involves something that has already been answered earlier in the lecture.
-\item And if we reverse this problem: A teacher may be interrupted by questions that involve earlier parts in the slides (if the student was not paying attention).
-\end{itemize}
-All these problems are solved by SmartClass:\\
-Asking a question via the Quick Question Box does not immediately interrupt the teacher. If the question can be answered by the system alone using new or previous slides, then the problem is solved. If this is not the case and it is a good, relevant question then other students may vote in favor of it. It will then reach the top of the box where it is clearly visible for the teacher, who can then choose to either use the slide that attempted to answer the problem and explain it further or just explain the answer without using these slides. Since students are free to scroll through the slides themselves, they will be able to see if their question has not already been answered, thus leaving more time for relevant and new questions.
+SmartClass is a system that enhances the lecture experience for both the students and the teacher. Students no longer have to be afraid of asking questions and can be helped individually by the system without interrupting the whole class. Before the lecture the teacher has to put little effort into generating or updating the slides of last year's lecture. During the lecture the teacher is advised on what part of the lecture is unclear to a large part of the students. SmartClass helps the teacher helps the teacher in such a way that still leaves him/her in control of what happens. 
+
+Although the system is not foolproof, it is still a big improvement on traditional lectures.
+
+
 
 
 \end{document}
