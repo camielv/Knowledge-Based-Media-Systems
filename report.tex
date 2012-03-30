@@ -282,7 +282,7 @@ Figure \ref{teacherInterface} shows the teacher's interface during a lecture.
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{teacherInterfaceEditor.pdf}
-\caption{The teacher editor. As supposed to the student interface, the teacher interface does not display the questions anonymous.}
+\caption{The teacher editor. As opposed to the student interface, the teacher interface does not display the questions anonymous.}
 \label{teacherInterfaceEditor}
 \end{figure}
 
@@ -292,7 +292,7 @@ Figure \ref{teacherInterfaceEditor} shows the interface of a teacher when genera
 \item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
 \end{description}
 
-\section{Quick Question Box and it's importance}
+\section{Quick Question Box and its importance}
 The Quick Question Box (QQB) is displayed on both the students' interface and the teacher's interface. As stated before the QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system. 
 
 This question box is in fact (apart from real life contact of course) the only way for the teacher to interact with the students using the system. It can be done directly, by answering the questions himself or incorporating the slides into his or her own presentation, or indirectly by approving or disapproving of slides that were generated to answer questions. 
@@ -301,25 +301,34 @@ This question box is in fact (apart from real life contact of course) the only w
 
 \section{Discussion}
 \subsection{Improvements}
-The system can be improved in a number of ways. Some of the shortcomings of the current design will be discussed. 
+The system can be improved in a number of ways. Some of the shortcomings and possible adjustments of the current design will be discussed. 
 \begin{itemize}
 \item Currently, if a student asks a question using the system, a slide is generated (if the system can give an answer) and then shown to the student. The problem here is that there is no guarantee that this answers the question, nor that it is the correct answer. The system may have somehow found false information or parsed the question wrong if it is an open question, thus creating the wrong query. Since the system will give the answer slide to the student during the presentation, there is no way for the teacher to check each and every slide that is generated. This manual check can be made afterwards but it would cost a lot of extra time and more importantly: it would be too late, the student already has the false knowledge. 
 
 A solution for this problem would be involving the other students in the slide creation. One approach to this is that when a question is asked, a slide will still be generated, but this slide can also be given votes by the students. Another approach is that students are able to answer questions themselves, but this may lead to chatting behavior. One of the better systems that uses this approach (and has been using it successfully) is StackOverflow, an online point for questions related to programming. A user can ask a question and this question will receive votes if other users think it is a good question. Then, anyone that is logged in can answer this question, and these answers can also receive votes if they are good. A user that asks good questions or gives good answers receives `reputation' as reward. This reputation is linked to the corresponding account, showing how credible the user is. However, this site is moderated to reduce irrelevant questions and answers and it is possible to answer questions quite some time after they have been asked. The system will only be online during the lecture and there are no moderators available, making it hard for such a system to work correctly. 
 
-\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. Other students find this question so funny that they vote in favor of it. The teacher sees this question pop up and depending on his reaction, this behavior will either stop or continue. Since the questions are asked anonymously, noone gets caught. A solution for this is making names visible for the teacher but part of the problem remains. Imagine the situation where the teacher calls out the student for asking such an irrelevant question. Would the student feel like he's scolded or would he simply be getting the credit for asking something funny? 
+\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. Other students find this question so funny that they vote in favor of it. The teacher sees this question pop up and depending on his reaction, this behavior will either stop or continue. Since the questions are asked anonymously, noone gets caught. A solution for this is making names visible. This was also incorporated in the current design. However, part of the problem remains. Imagine the situation where the teacher calls out the student for asking such an irrelevant question. Would the student feel like he's scolded or would he simply be getting the credit for asking something funny? 
 
-\item 
+\item The students are able to save their slides alongside the notes they made for the presentation. It is still unknown if this will work better than regular notes, equally good, or worse. Perhaps, for some students, making notes is hard if they already have the slides in front of them and are too busy with reading them to make notes. It is also not sure if the students will not be distracted by the questionbox.  There is currently no solution for this problem yet, perhaps a configuration file for each user, containing their preferences and which components should be shown and which should not be shown, would be useful here. 
 \end{itemize}
 
+
 \subsection{Future work}
-%TODO
+There are some additions that could contribute to the system. Some of the techniques that would be used to create such additions already exist, it is just that they were not taken into this design to prevent it from becoming too broad of a subject:
+\begin{itemize}
+\item 
+Currently, the system only receives feedback via buttons on the screen. It would also be possible to extract more features by adding camera's and audio input devices. Not only would the system then be able to capture the lecture entirely, asked questions (in real life) can also be recorded. If these were parsed, the system could create a slide for these questions as well. 
+\item
+As stated above, user information for each user (including students) would also be useful. A screen giving options about what components to show would contribute to the idea that the system is not designed for a specific type of student.
+\item 
+The ability to answer questions asked by other students can be very useful. A teacher does not have time to answer all questions that are asked, which is where the voting system comes in handy. However, if a question is asked and does not get enough votes because the answer is simple, it would be a good contribution to the system if other students could give answers if the system can not answer the question or not answer it correctly (for whatever reason). Plus, there is also the possibility of students using this question-response structure to chat with eachother. 
+\end{itemize}
 
 %TODO fisnish
 \section{Conclusion}
 SmartClass is a system that enhances the lecture experience for both the students and the teacher. Students no longer have to be afraid of asking questions and can be helped individually by the system without interrupting the whole class. Before the lecture the teacher has to put little effort into generating or updating the slides of last year's lecture. During the lecture the teacher is advised on what part of the lecture is unclear to a large part of the students. SmartClass helps the teacher helps the teacher in such a way that still leaves him/her in control of what happens. 
 
-Although the system is not foolproof, it is still a big improvement on traditional lectures. Not only will the time to create presentations decrease significantly, the risk of using outdated presentation material decreases as well. 
+Although the system is not foolproof, it is still a big improvement on traditional lectures. Not only will the time to create presentations decrease significantly, the risk of using outdated presentation material decreases as well. Students are able to save their notes together with the corresponding slides, maybe this will work better than making notes only (though this depends on the student, of course). 
 
 
 
