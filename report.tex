@@ -215,10 +215,6 @@ The application uses the Central Authentication Service (CAS) of the University 
 \label{CAS}
 \end{figure}
 
-\subsection{Quick Question Box}
-The Quick Question Box (QQB) is displayed on both the students' interface as well on the teacher's interface. The QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system.
-
-
 \section{Student Perspective}
 \subsection{Student interface}
 
@@ -296,6 +292,12 @@ Figure \ref{teacherInterfaceEditor} shows the interface of a teacher when genera
 \item[Using generated slides.] When a teacher decides that he/she will use the generated slide, it is incorporated in the presentation. 
 \end{description}
 
+\section{Quick Question Box and it's importance}
+The Quick Question Box (QQB) is displayed on both the students' interface and the teacher's interface. As stated before the QQB contains a list of questions that have been asked by the students. Each question is linked to its generated slide (only if an answer could be generated). This gives students, especially lazy students, easy access to extra information without having to type the question themselves. As stated before, each question can be voted up or down and are sorted by their number of votes. This gives the teacher an overview of the questions that are puzzling most students. The teacher can then choose to cover a question with the whole class using the slide generated to answer this question. The teacher has also the option to deny a slide, when it is not covering the question at all in order to give feedback to the system. 
+
+This question box is in fact (apart from real life contact of course) the only way for the teacher to interact with the students using the system. It can be done directly, by answering the questions himself or incorporating the slides into his or her own presentation, or indirectly by approving or disapproving of slides that were generated to answer questions. 
+
+
 
 \section{Discussion}
 \subsection{Improvements}
@@ -305,7 +307,9 @@ The system can be improved in a number of ways. Some of the shortcomings of the 
 
 A solution for this problem would be involving the other students in the slide creation. One approach to this is that when a question is asked, a slide will still be generated, but this slide can also be given votes by the students. Another approach is that students are able to answer questions themselves, but this may lead to chatting behavior. One of the better systems that uses this approach (and has been using it successfully) is StackOverflow, an online point for questions related to programming. A user can ask a question and this question will receive votes if other users think it is a good question. Then, anyone that is logged in can answer this question, and these answers can also receive votes if they are good. A user that asks good questions or gives good answers receives `reputation' as reward. This reputation is linked to the corresponding account, showing how credible the user is. However, this site is moderated to reduce irrelevant questions and answers and it is possible to answer questions quite some time after they have been asked. The system will only be online during the lecture and there are no moderators available, making it hard for such a system to work correctly. 
 
-\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. 
+\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. Other students find this question so funny that they vote in favor of it. The teacher sees this question pop up and depending on his reaction, this behavior will either stop or continue. Since the questions are asked anonymously, noone gets caught. A solution for this is making names visible for the teacher but part of the problem remains. Imagine the situation where the teacher calls out the student for asking such an irrelevant question. Would the student feel like he's scolded or would he simply be getting the credit for asking something funny? 
+
+\item 
 \end{itemize}
 
 \subsection{Future work}
@@ -315,7 +319,7 @@ A solution for this problem would be involving the other students in the slide c
 \section{Conclusion}
 SmartClass is a system that enhances the lecture experience for both the students and the teacher. Students no longer have to be afraid of asking questions and can be helped individually by the system without interrupting the whole class. Before the lecture the teacher has to put little effort into generating or updating the slides of last year's lecture. During the lecture the teacher is advised on what part of the lecture is unclear to a large part of the students. SmartClass helps the teacher helps the teacher in such a way that still leaves him/her in control of what happens. 
 
-Although the system is not foolproof, it is still a big improvement on traditional lectures.
+Although the system is not foolproof, it is still a big improvement on traditional lectures. Not only will the time to create presentations decrease significantly, the risk of using outdated presentation material decreases as well. 
 
 
 
