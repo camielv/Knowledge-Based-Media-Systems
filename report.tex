@@ -41,7 +41,7 @@
 }
 
 \author{
-\vspace{1.5cm}
+\vspace{0.5cm}
 Supervised by dr. F. Nack and M. S. Latour\\[0.5cm]
 \begin{tabular}{c c c c}
 M. A. Cabot & S. Laan & C. R. Verschoor & A. J. Wiggers\\
@@ -58,11 +58,11 @@ Universiteit van Amsterdam\\
 % TITLE PAGE
 \thispagestyle{empty}
 \printtitle                  
+\printauthor
 \vfill
 \begin{abstract}
-\noindent This paper describes a design of a knowledge media application for universities based on the user experience of lectures in university. The application, called SmartClass, gathers data from the user, internet and previous presentations in order to create new presentation slides based on the feedback of users. The application focuses on the individual experience of the users: the teacher and the student. All processed data is represented in OWL/RDF format, to provide a reasoning logic that can run queries in our ontology and browse through the available data. The user can ask questions about specific elements of the presentation. The application searches the information about this query and presents this to the user on newly generated slides. The application contains a self learning system that improves the presentation based on feedback, namely the approval or denial of slides and the amount of questions asked.
+\noindent This paper describes a design of a knowledge media application for universities based on the user experience of lectures in university. The application, called SmartClass, gathers data from the user, internet and previous presentations in order to create new presentation slides based on the feedback of users. The application focuses on the individual experience of the users: the teacher and the student. All processed data is represented in RDF format, to provide a reasoning logic that can run queries in our ontology and browse through the available data. The user can ask questions about specific elements of the presentation. The application searches the information about this query and presents this to the user on newly generated slides. The application contains a self learning system that improves the presentation based on feedback, namely the approval or denial of slides and the amount of questions asked.
 \end{abstract}
-\printauthor
 \newpage
 
 % TABLEOFCONTENTS
@@ -101,7 +101,7 @@ Since no two students are the same, the following three `stereotypical' students
 These three types of students were taken into consideration in the design process.
 
 \subsection{Teachers}
-The second group of users consists of teachers. This group should have a lot more control over the system than a student. It is important that the system gives teachers this control without distracting them from their main task, namely, giving the lecture. No distinction was made between different types of teacher, but the system should be able to `learn' the preferences of the teacher through examples and feedback.  
+The second group of users consists of teachers. This group should have more control over the system than a student. It is important that the system gives teachers this control without distracting them from their main task, namely, giving the lecture. No distinction was made between different types of teacher, but the system should be able to `learn' the preferences of the teacher through examples and feedback.  
 
 
 \section{System overview}
@@ -110,14 +110,8 @@ The application will allow users to access new generated content in two ways: Fi
 The system that was designed consists of several components. In this section each component will be described in detail, but first an overview of the whole system is given: the global interaction and system flow are described. First the global system flow is explained.
 
 Figure \ref{flowchart} shows the global system flow. Firstly, the teacher has to input some information. This information is used in the presentation generation. The slides the system produces have to be evaluated by the teacher. If the teacher does not approve, he has to give feedback and the system tries again.
-When the slides are approved, the presentation can commence. In practice the slides there will be much more time between the approval of the slides and the start of the presentation; the flow chart gives the impression this happens immediately after the approval, but this does not have to be the case.
+When the slides are approved, the presentation can commence. In practice there will be much more time between the approval of the slides and the start of the presentation; the flow chart gives the impression this happens immediately after the approval, but this does not have to be the case.
 When the presentation starts, the students have the opportunity to interact with the system. They can ask questions to the system. In the event this happens, the system tries to answer the question and generates slides to answer it.
-
-In figure \ref{systemOverview} the different components of the system are displayed. The arrows indicate communication links between components. The global interaction between these different system parts will be explained shortly. 
-
-The main concept the system uses is the slide generation component. The same slide generator is used for the online and offline generation. The input for the slide generation comes from different sources. The main source is the external knowledge base. The other inputs are the inputs from the student (via the Quick Question Dialog), the teacher (via pre-generation). Finally the knowledge that is necessary for actually creating the slides comes from the system knowledge base.
-When the slides are generated they are stored in the system knowledge base. The question with the answer slide will appear in the Quick Question Box, for both teacher and student.
-The Quick Question Dialog uses the external knowledge base for definition questions, this will be explained in more detail later. The system knowledge base provides the tools to convert the posed question into a RDF query.
 
 \begin{figure}[!h]
 \centering
@@ -126,6 +120,8 @@ The Quick Question Dialog uses the external knowledge base for definition questi
 \label{flowchart}
 \end{figure}
 
+In figure \ref{systemOverview} the different components of the system are displayed. The arrows indicate communication links between components. The global interaction between these different system parts will be explained shortly. 
+
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{systemOverview.pdf}
@@ -133,12 +129,17 @@ The Quick Question Dialog uses the external knowledge base for definition questi
 \label{systemOverview}
 \end{figure}
 
+The main concept the system uses is the slide generation component. The same slide generator is used for the online and offline generation. The input for the slide generation comes from different sources. The main source is the external knowledge base. The other inputs come from the students (via the Quick Question Dialog) and the teacher (via pre-generation). Finally the knowledge that is necessary for actually creating the slides comes from the system knowledge base.
+When the slides are generated they are stored in the system knowledge base. The question with the answer slide will appear in the Quick Question Box, for both teacher and student.
+The Quick Question Dialog uses the external knowledge base for definition questions, this will be explained in more detail later. The system knowledge base provides the tools to convert the posed question into a RDF query.
+
+
 \subsection{Lecture representation}
 The lecture representation holds the framework of the presentation. It defines how the course material is arranged. Firstly, the system must decide the main structure of the lecture. For example; first the introduction, then content and finally the conclusion. Secondly, the system must decide the flow of the lecture. A possible flow could be to first start with explaining the important terms and then use an example to clarify them even more.
 
 Once the main structure and flow is determined the system must order the information that can be used for the lecture. In a good lecture each slide only contains terms and topics that are:
 \begin{itemize}
-\item known to the students in advance. This could be because it was explained in a previous lectures or because it is assumed to be common knowledge.
+\item known to the students in advance. This could be because it was explained in a previous lecture or because it is assumed to be common knowledge.
 \item explained in the previous slides of this lecture.
 \item explained in the current slide of this lecture.
 \end{itemize}
@@ -152,26 +153,26 @@ Each slide (or combination of slides) should contain the following components:
 \item[Text.] Each piece of text is related/linked to a bullet point.
 \item[Images.] Each image is related/linked to a bullet point.
 \end{description}
-The system knows what the relationships are between the components on a slide. In case a question is asked about a term, the system must know what type of components would be best as answering the question. Some questions would be better answered with a picture (e.g. `What is an apple?') while for other questions text would be more suitable (e.g. `When was king Louis XVI born?'). In order to do so, the system must have knowledge about where the term lies in the hierarchy of objects (e.g. does the question ask about the appearance of the term or about a date).
+The system knows what the relationships are between the components on a slide. In case a question is asked about a term, the system must know what type of components would be best as answering the question. Some questions would be better answered with a picture (e.g. `What is an apple?') while for other questions text would be more suitable (e.g. `When was king Louis XVI born?'). In order to do so, the system must have knowledge about where the term lies in the hierarchy of objects (e.g. is the question about the appearance of the term or about a date).
 
 \subsection{Slide generation in general}
 Each slide is generated according to a template. The components are all filled in in the correct place. The system can choose between multiple templates, based on the number (and type) of components that are to be used. 
 
-There is a limit to the number of words on a single slide to prevent slides from becoming walls of text. The system will create multiple slides if a single one is not sufficient. It will prefer to split a slide after a single component, e.g. at the end of bullet points, over just starting a new slide when the old one is full. 
+There is a limit to the number of words on a single slide to prevent slides from becoming walls of text. The system will create multiple slides if a single one is not sufficient. If there is to much information that can be displayed on a single slide, then the system will prefer to split the information after a single component, e.g. at the end of bullet points. The system would not just simply generate a new slide when the old one is full. 
 
 The system also prefers balanced slides over slides filled with a single component, e.g. two slides, each containing two images and two pieces of text, will be preferred over a slide containing only text and a slide containing only images. How this balance is reached depends on the semantic knowledge about each component. The system will try to distribute components in such a way that corresponding ones are put on the same slides, using the semantic knowledge it has of these components. 
 
 \subsection{Offline generation}
 Offline generation is the act of generating new slides for the presentation based on the previous slides. This action is performed before a lecture so that the teacher knows what the slides will look like. Depending on the representation of the previous presentation different action need to be performed during the offline generation. 
 
-The first time a lecture is given using this system the previous slides do not have the required SmartClass-representation. In this case the system must place the content of the old slides in the representation used by the system. The system tries to match its lecture- and slide-templates with the slides of the previous slides. The templates that match best are then used for the offline generation. If the previous slides already have the required SmartClass-representation, then the previous templates are simply used for the offline generation.
+The first time a lecture is given using this system the previous slides do not have the required SmartClass-representation. In this case the system must place the content of the old slides in the representation used by the system. The system tries to match its lecture and slide templates with the slides of the previous slides. The templates that match best are then used for the offline generation. If the previous slides already have the required SmartClass-representation, then the previous templates are simply used for the offline generation.
 
-SmartClass uses a set of heuristics to determine whether to change the structure of the lecture. Changing the structure would be based on the feedback (if such exists) of last year's lecture. If last year the teacher chose to use a slide generated to answer a student's question, then this time the system can choose to add the slide to the presentation. Another set of heuristics are used to determine whether to update the content of the of a slide. The systems needs to search the external database to see if a piece of text, image or other slide components is outdated. If so, the system will replace these components (taking into consideration the lecture and slide representation).
+SmartClass uses a set of heuristics to determine whether to change the structure of the lecture. Changing the structure would be based on the feedback (if such exists) of last year's lecture. If last year the teacher chose to use a slide generated to answer a student's question, then this time the system can choose to add the slide to the presentation. Another set of heuristics are used to determine whether to update the content of the of a slide. The systems needs to search the external database to see if a piece of text, image or other slide component is outdated. If so, the system will replace these components (taking into consideration the lecture and slide representation).
 
 When SmartClass is finished with generating slides the teacher is able to reject, alter or add new slides. This way the teacher is always in full control of what the slides will depict. 
 
 \subsection{Online generation}
-A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student’s question. We distinguish between two types of questions: definition- and open-questions. 
+A student is able to ask a question about every element of a slide by clicking on it. Online generation is the act of generating a new slide in real-time that answers the student's question. We distinguish between two types of questions: definition and open questions. 
 
 A definition-question is a question about the definition of a term. The system create a slide that has as title the selected term and as content the definition of that term. If available, an image can be added to clarify the definition. This type of question will be especially helpful for the forgetful and less intelligent student. 
 
@@ -221,7 +222,7 @@ The application uses the Central Authentication Service (CAS) of the University 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.7\textwidth]{studentInterface.pdf}
-\caption{The student interface. Student names would normally not be shown in the student interface}
+\caption{The student interface. The students have the option to ask a question anonymously.}
 \label{studentInterface}
 \end{figure}
 
@@ -240,7 +241,7 @@ The main window is where the most time is spent. It consists of the following co
 \centering
 \includegraphics[width=0.7\textwidth]{studentInterfaceDialog.pdf}
 \includegraphics[width=0.7\textwidth]{studentInterfaceAnswer.pdf}
-\caption{The student interface. The first image shows a question being asked about a component on the current slide. The second image shows a question being selected in the QQB. Student names would normally not be shown in the student interface.}
+\caption{The student interface. The first image shows a question being asked about a component on the current slide. The second image shows a question being selected in the QQB. The students have the option to ask a question anonymously.}
 \label{studentInterfaceDialogAnswer}
 \end{figure}
 
@@ -252,7 +253,7 @@ The question dialog is a popup window in which the student can type a question o
 \end{description}
 
 \subsubsection{Notes}
-As stated before, beneath every slide a student is able to make his/her notes. After a lecture the student will be able to extract a file containing the slides with his/her notes. 
+As stated before, beneath every slide students are able to make their notes. After a lecture the students will be able to extract a file containing the slides with their notes. 
 
 
 \section{Teacher Perspective}
@@ -303,13 +304,13 @@ This question box is in fact (apart from real life contact of course) the only w
 \subsection{Improvements}
 The system can be improved in a number of ways. Some of the shortcomings and possible adjustments of the current design will be discussed. 
 \begin{itemize}
-\item Currently, if a student asks a question using the system, a slide is generated (if the system can give an answer) and then shown to the student. The problem here is that there is no guarantee that this answers the question, nor that it is the correct answer. The system may have somehow found false information or parsed the question wrong if it is an open question, thus creating the wrong query. Since the system will give the answer slide to the student during the presentation, there is no way for the teacher to check each and every slide that is generated. This manual check can be made afterwards but it would cost a lot of extra time and more importantly: it would be too late, the student already has the false knowledge. 
+\item Currently, if a student asks a question using the system, a slide is generated (if the system can give an answer) and then shown to the student. The problem here is that there is no guarantee that this answers the question, nor that it is the correct answer. The system may have somehow found false information or parsed the question wrong if it is an open question, thus creating the wrong query. Since the system will give the answer slide to the student during the presentation, there is no way for the teacher to check each and every slide that is generated. This manual check can be made afterwards but it would cost extra time and more importantly: it would be too late, the student already has the false knowledge. 
 
-A solution for this problem would be involving the other students in the slide creation. One approach to this is that when a question is asked, a slide will still be generated, but this slide can also be given votes by the students. Another approach is that students are able to answer questions themselves, but this may lead to chatting behavior. One of the better systems that uses this approach (and has been using it successfully) is StackOverflow, an online point for questions related to programming. A user can ask a question and this question will receive votes if other users think it is a good question. Then, anyone that is logged in can answer this question, and these answers can also receive votes if they are good. A user that asks good questions or gives good answers receives `reputation' as reward. This reputation is linked to the corresponding account, showing how credible the user is. However, this site is moderated to reduce irrelevant questions and answers and it is possible to answer questions quite some time after they have been asked. The system will only be online during the lecture and there are no moderators available, making it hard for such a system to work correctly. 
+A solution for this problem would be involving the other students in the slide creation. One approach to this is that when a question is asked, a slide will still be generated, but this slide can also be given votes by the students. Another approach is that students are able to answer questions themselves, but this may lead to chatting behaviour. One of the better systems that uses this approach (and has been using it successfully) is StackOverflow \footnote{www.stackoverflow.com}, an online point for questions related to programming. A user can ask a question and this question will receive votes if other users think it is a good question. Then, anyone that is logged in can answer this question, and these answers can also receive votes if they are good. A user that asks good questions or gives good answers receives `reputation' as reward. This reputation is linked to the corresponding account, showing how credible the user is. However, this site is moderated to reduce irrelevant questions and answers and it is possible to answer questions quite some time after they have been asked. The system will only be online during the lecture and there are no moderators available, making it hard for such a system to work correctly. 
 
-\item Let's say that there is a student in a class that does not take the lecture, nor the lecturer, too seriously. He asks the system a question that is irrelevant to the lecture, for example: A lecture about instruments would lead to the question ‘Is mayonnaise an instrument'. Other students find this question so funny that they vote in favor of it. The teacher sees this question pop up and depending on his reaction, this behavior will either stop or continue. Since the questions are asked anonymously, noone gets caught. A solution for this is making names visible. This was also incorporated in the current design. However, part of the problem remains. Imagine the situation where the teacher calls out the student for asking such an irrelevant question. Would the student feel like he's scolded or would he simply be getting the credit for asking something funny? 
+\item If there are students in class that do not take the lecture, nor the lecturer, too seriously. They ask the system a question that is irrelevant to the lecture, for example: a lecture about instruments would lead to the question `Is mayonnaise an instrument'. Other students find this question so funny that they vote in favor of it. The teacher sees this question pop up and depending on the reaction, this behaviour will either stop or continue. Since the questions are asked anonymously, noone gets caught. A solution for this is making names visible. This was also incorporated in the current design. However, part of the problem remains. Imagine the situation where the teacher calls out the student for asking such an irrelevant question. Would the student feel like he is scolded or would he simply be getting the credit for asking something funny?
 
-\item The students are able to save their slides alongside the notes they made for the presentation. It is still unknown if this will work better than regular notes, equally good, or worse. Perhaps, for some students, making notes is hard if they already have the slides in front of them and are too busy with reading them to make notes. It is also not sure if the students will not be distracted by the questionbox.  There is currently no solution for this problem yet, perhaps a configuration file for each user, containing their preferences and which components should be shown and which should not be shown, would be useful here. 
+\item The students are able to save their slides alongside the notes they made for the presentation. It is still unknown if this will work better than regular notes, equally good, or worse. Perhaps, for some students, making notes is hard if they already have the slides in front of them and are too busy with reading them to make notes. It is also not sure if the students will not be distracted by the question box.  There is currently no solution for this problem yet, perhaps a configuration file for each user, containing their preferences and which components should be shown and which should not be shown, would be useful here. 
 \end{itemize}
 
 
